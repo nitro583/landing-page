@@ -1,0 +1,383 @@
+@charset "UTF-8";
+
+$theme-color:#3f51b5;
+$active-color:#495cc9;
+$default-font-size:16px;
+$sm-font-size:12px;
+$breakpoints : (
+  "md":"screen and (max-width:1024px)",
+  "sm":"screen and (max-width:767px)",
+);
+@mixin mq($breakpoint:md){
+  @media #{map-get($breakpoints, $breakpoint)}{
+    @content;
+  }
+}
+/*共通部分
+*/
+
+html{
+  font-size: 100%;
+}
+
+body{
+  font-family:"Yu Gothic", Verdana, Geneva, Tahoma, sans-serif,"Hiragino Sans";
+ 
+  max-width:100%;
+  margin-right: auto;
+  margin-left: auto;
+
+  background-color:#fff;
+  font-size:$default-font-size;
+
+  @include mq(sm){
+    font-size:$sm-font-size;
+  }
+}
+a{
+  text-decoration: none;
+  &:hover{
+    text-decoration: underline;
+    opacity: 0.7;
+  }
+}
+img{
+  max-width: 100%;
+}
+
+.btn{
+background-color: $theme-color;
+border: none;
+box-shadow: 0px 3px 6px #00000029;
+border-radius: 8px;
+color:#FFF;
+font-size:24px;
+@include mq(sm){
+  font-size:$sm-font-size;
+  
+}
+&:hover{
+  text-decoration: none;
+  background-color:$active-color;
+  opacity: 1;
+}
+&:active{
+  background-color:$theme-color;
+  opacity: 1;
+}
+}
+/*header
+*/
+
+.page-header{
+  display: flex;
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  justify-content: space-between;
+  height: 100px;
+  padding-top:30px; 
+  background-color: $theme-color;
+  box-shadow: 0px 3px 3px #00000029;
+  z-index: 2;
+  @include mq(sm){
+    height: 30px;
+    padding:0;
+    margin:0;
+    
+  }
+  .header-left{
+    margin-left: 40px;
+    @include mq(sm){
+      margin-left:10px;
+      margin-top:5px;
+      .logo{
+        width:100px;
+      }
+    }
+  }
+
+  .header-right{
+    
+
+    margin-right:40px;
+    margin-top :12px;
+    @include mq(sm){
+      display: none;
+    }
+    
+    .main-nav{
+      display: flex;
+    justify-content: space-between;
+
+
+      li a{
+        position: relative;
+        color: #FFF;
+        margin-left:40px;
+        &:hover{
+
+          text-decoration: none;
+        }
+
+      }
+    }
+    
+  }
+}
+li a.is-active::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background:  red;
+}
+
+
+/*top*/
+
+#top{
+  width: 100%;
+  height:600px;
+ 
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: #333333;
+  margin-top: 100px;
+
+  @include mq(sm){
+    margin-top: 30px;
+  }
+  .bg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: transparent url(../img/title-back.jpg) no-repeat center;
+    background-size: cover;
+    opacity: 0.6;
+  }
+
+ .main-visual-content{
+   width:100%;
+
+   position: absolute;
+   top: 50%; /*親要素を起点に上から50%*/
+   left: 50%;  /*親要素を起点に左から50%*/
+   transform: translateY(-50%) translateX(-50%); /*要素の大きさの半分ずつを戻す*/
+   -webkit-transform: translateY(-50%) translateX(-50%);
+
+  h1{
+  font-size :64px;
+  font-weight: 700;
+  letter-spacing: 0px;
+  @include mq(sm){
+
+    font-size :24px;
+    }
+  }
+  p{
+   margin-top: 32px;
+    font-size :24px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    @include mq(sm){
+      margin-top:20px;
+      font: normal normal bold 14px/14px YuGothic;
+      }
+ 
+  }
+ }
+
+  .btn-contact{
+    display: block;
+    font-weight:bold;
+    width: 384px;
+    height: 72px;
+    margin:0 auto;
+    margin-top:40px ;
+    padding-top:24px;
+
+    @include mq(sm){
+      height: 44px;
+      margin-top:20px;
+      padding-top:16px;
+      padding-bottom:16px;
+      width:50%;
+    
+
+      }
+
+
+  }
+}
+
+
+/*Card*/
+
+section.card{
+  background-color: #EFEFEF;
+  padding: 100px 0;
+}
+h2{
+  position: relative;
+  text-align: center;
+  color: #333333;
+  font-size: 48px;
+  font-weight:700;
+  margin-bottom: 94px;
+  &::after{
+    content: "";
+    position: absolute;
+    display: block;
+    top: 72px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 60px;
+    height: 4px;
+    background: #3F51B5;
+  }
+  
+}
+.card_items {
+  display: flex;
+  flex-wrap: wrap;
+  padding:0 40px;
+}
+.card_item {
+  width: calc(33.33333333% - 24px * 2 / 3);
+  margin-right: 24px;
+  margin-top: 24px;
+  background:#FFF;
+  padding: 16px;
+  color: #6F7579;
+  border-radius: 8px;
+  
+  @include mq(md){
+    width :calc(50% - 24px * 1 / 2);
+  }
+  @include mq(sm){
+    width :100%;
+    margin-right: 0;
+  }
+  
+  h3{
+    margin-top: 16px;
+    margin-bottom: 16px;
+    font: normal normal bold 20px/22px YuGothic;
+  }
+  p{
+    font: normal normal bold 16px/24px YuGothic;
+  }
+}
+
+.card_item:nth-child(3n) {
+  margin-right: 0;
+  @include mq(md){
+    margin-right:24px;
+  }
+  @include mq(sm){
+    margin-right:0;
+  }
+}
+@include mq(md){
+  .card_item:nth-child(2n) {
+    margin-right: 0;
+  }
+}
+
+section.section-news{
+  background-color: #FFF;
+  padding: 100px 0;
+  
+}
+.news-inner{
+  width: 800px;
+  max-width:100%;
+  margin:auto;
+  @include mq(sm){
+    width:100%;
+    padding: 0 16px;
+  }
+}
+.news{
+  position: relative;
+  
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 12px;
+  margin: 20px 0 12px 0;
+  border-bottom: solid 1px #707070;
+  &:last-child {
+     border-bottom: none ;
+  }
+  @include mq(sm){
+    display: block;
+  }
+
+}
+  a.label{
+      position: relative;
+      height: 100%;
+      width: 80px;
+      display:inline-block;
+      padding: 8px;
+      text-align: center;
+      font-weight: bold;
+      background: #666666;
+      color: #fff;
+      border-radius: 4px;
+      text-decoration: none;
+
+      @include mq(sm){
+        margin-left: auto;
+        padding:4px;
+      }
+      &.label_2{
+        background: #3F51B5;
+      }
+      &.label_3{
+        background: #E81919;
+      }
+    } 
+        .news-text{
+          margin-left: 20px;
+          line-height: 18px;
+          width: calc(100% - 185px);
+      
+          @include mq(sm){
+            width: 100%;
+            margin:10px;
+          }
+  } 
+  .meta{
+    display: flex;
+    width: 185px;
+    height:100%;
+    align-items: center;
+    @include mq(sm){
+      width: auto;
+      
+      }
+    }
+    .date{
+      width: 105px;
+    }
+.more {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  
+  a{
+    font-weight: bold;
+        color: #E81919;
+      } 
+       
+    }
+
